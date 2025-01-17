@@ -17,4 +17,5 @@ Route::prefix('article')->name('articles.')->group(function () {
     Route::post('/add', [ArticleController::class, 'store'])->name('store');
     Route::get('/list', [ArticleController::class, 'list'])->name('list');
     Route::get('/{article}', [ArticleController::class, 'show'])->name('show');
+    Route::get('/category/{category}', [ArticleController::class, 'listByCategory'])->name('list-by-category');
 });

@@ -11,7 +11,7 @@ class ArticleController extends Controller
 
     public function index()
     {
-        $articles = Article::orderBy('created_at', 'DESC')->get();
+        $articles = Article::orderBy('created_at', 'DESC')->paginate(6);
         $categories = Category::all();
         return view('index', ['articles' => $articles, 'categories' => $categories]);
     }
@@ -54,5 +54,17 @@ class ArticleController extends Controller
     {
         $selectedArticle = Article::with('category')->findOrFail($article->id);
         return view('articles.show', ['article' => $selectedArticle]);
+    }
+
+    public function listByCategory(Category $category)
+    {
+        $articles = Article::where('categories_id', $category->id)->paginate(6);
+        $categories = Category::all();
+
+        return view('articles.list-by-category', [
+            'articles' => $articles,
+            'category' => $category,
+            'categories' => $categories,
+        ]);
     }
 }

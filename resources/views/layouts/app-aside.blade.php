@@ -18,7 +18,7 @@
         <div class="flex flex-col border-2 border-gray-200 rounded-lg w-4/5 p-4">
             @yield('content')
         </div>
-        <aside class="flex flex-col border-2 border-gray-200 rounded-lg w-1/5 p-4">
+        <aside class="flex flex-col border-2 border-gray-200 rounded-lg w-1/5 p-4 flex-grow">
             @include('layouts.aside')
         </aside>
     </main>

@@ -30,7 +30,7 @@
         <div class="lg:col-span-2">
             <article class="bg-light p-4 rounded-lg shadow-md">
                 <header class="mb-4">
-                    <h2 class="fw-bold mb-3">Contenu</h2>
+                    {{-- <h2 class="fw-bold mb-3">Contenu</h2> --}}
                 </header>
 
                 <section class="mb-5">
@@ -38,7 +38,7 @@
                 </section>
 
                 <footer class="mt-4 text-center">
-                    <a href="" class="btn btn-primary">Retour à la liste des articles</a>
+                    {{-- <a href="" class="btn btn-primary">Retour à la liste des articles</a> --}}
                 </footer>
             </article>
         </div>
