@@ -12,7 +12,8 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::all();
-        return view('index', ['articles' => $articles]);
+        $categories = Category::all();
+        return view('index', ['articles' => $articles, 'categories' => $categories]);
     }
 
     public function add()
