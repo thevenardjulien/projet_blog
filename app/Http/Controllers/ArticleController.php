@@ -11,7 +11,7 @@ class ArticleController extends Controller
 
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::orderBy('created_at', 'DESC')->get();
         $categories = Category::all();
         return view('index', ['articles' => $articles, 'categories' => $categories]);
     }
@@ -32,6 +32,13 @@ class ArticleController extends Controller
             'photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
+        if ($request->hasFile('photo')) {
+            $path = $request->file('photo')->store('photos', 'public');
+            // Il faudra exécuter la commande suivante pour permettre le lien symbolique entre stroage et public
+            // php artisan storage:link
+            $validated['photo'] = $path;
+        }
+
         Article::create($validated);
 
         return back()->with('success', 'Nouvel article enregistré');
@@ -41,5 +48,11 @@ class ArticleController extends Controller
     {
         $articles = Article::all();
         return view('articles.list', ['articles' => $articles]);
+    }
+
+    public function show(Article $article)
+    {
+        $selectedArticle = Article::with('category')->findOrFail($article->id);
+        return view('articles.show', ['article' => $selectedArticle]);
     }
 }

@@ -19,7 +19,7 @@
             @yield('content')
         </div>
         <aside class="flex flex-col border-2 border-gray-200 rounded-lg w-1/5 p-4">
-            @include('aside')
+            @include('layouts.aside')
         </aside>
     </main>
 

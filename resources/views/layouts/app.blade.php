@@ -15,7 +15,7 @@
     @include('layouts.header')
 
     <main class="container grow max-w-[70%] mx-auto p-10 flex gap-10">
-        <div class="flex flex-col border-2 border-gray-200 rounded-lg w-4/5 p-4">
+        <div class="flex flex-col border-2 border-gray-200 rounded-lg w-full p-4">
             @yield('content')
         </div>
     </main>

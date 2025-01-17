@@ -16,4 +16,5 @@ Route::prefix('article')->name('articles.')->group(function () {
     Route::get('/add', [ArticleController::class, 'add'])->name('add');
     Route::post('/add', [ArticleController::class, 'store'])->name('store');
     Route::get('/list', [ArticleController::class, 'list'])->name('list');
+    Route::get('/{article}', [ArticleController::class, 'show'])->name('show');
 });
