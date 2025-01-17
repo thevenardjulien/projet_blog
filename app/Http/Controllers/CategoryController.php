@@ -35,4 +35,28 @@ class CategoryController extends Controller
 
         return back()->with('success', 'Nouvelle catégorie créée');
     }
+
+    public function edit(Category $category)
+    {
+        return view('categories.edit', ['category' => $category]);
+    }
+
+    public function update(Request $request, Category $category)
+    {
+        $validated = $request->validate([
+            'titre' => 'required|string|min:4|max:255',
+        ]);
+
+        $category->update($validated);
+
+        return back()->with('success', 'Catégorie modifiée');
+    }
+
+    public function delete(Category $category)
+    {
+        $category->delete();
+        $categories = Category::all();
+
+        return redirect()->route('categories.index')->with('success', 'Catégorie supprimée');
+    }
 }
