@@ -13,7 +13,8 @@ class ArticleController extends Controller
     {
         $articles = Article::orderBy('created_at', 'DESC')->paginate(6);
         $categories = Category::all();
-        return view('index', ['articles' => $articles, 'categories' => $categories]);
+        $articleTitle = "Tous les articles";
+        return view('index', ['articles' => $articles, 'categories' => $categories, 'articleTitle' => $articleTitle]);
     }
 
     public function add()
@@ -60,11 +61,24 @@ class ArticleController extends Controller
     {
         $articles = Article::where('categories_id', $category->id)->paginate(6);
         $categories = Category::all();
+        $articleTitle = $category->titre;
 
         return view('articles.list-by-category', [
             'articles' => $articles,
             'category' => $category,
             'categories' => $categories,
+            'articleTitle' => $articleTitle,
         ]);
+    }
+
+    public function search(Request $request)
+    {
+        $categories = Category::all();
+        $search = $request->search;
+        $articles = Article::where('titre', 'LIKE', '%' . $search . '%')
+            ->orWhere('contenu', 'LIKE', '%' . $search . '%')
+            ->orWhere('auteur', 'LIKE', '%' . $search . '%')
+            ->paginate(6);
+        return view('articles.search', ['articles' => $articles, 'categories' => $categories, 'search' => $search]);
     }
 }
